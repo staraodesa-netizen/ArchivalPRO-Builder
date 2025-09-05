@@ -32,7 +32,7 @@ jobs:
 
     - name: Run Nuitka Build
       run: |
-        python -m nuitka --onefile --standalone --no-anti-bloat-for-module=streamlit.runtime.caching.cache_utils --windows-disable-console --output-dir=release app.py
+        python -m nuitka --onefile --standalone --windows-disable-console --output-dir=release app.py
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
