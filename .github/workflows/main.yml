@@ -23,9 +23,16 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Create secrets.toml for build
+      env:
+        GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      run: |
+        New-Item -Path . -Name ".streamlit" -ItemType Directory
+        Set-Content -Path ".streamlit/secrets.toml" -Value "api_key = `"${{ env.GEMINI_API_KEY }}`""
+
     - name: Run Nuitka Build
       run: |
-        python -m nuitka --onefile --standalone --windows-disable-console --output-dir=release app.py
+        python -m nuitka --onefile --standalone --no-anti-bloat-for-module=streamlit.runtime.caching.cache_utils --windows-disable-console --output-dir=release app.py
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
