@@ -28,7 +28,7 @@ jobs:
         python -m nuitka --onefile --standalone --plugin-enable=streamlit --windows-disable-console --output-dir=release app.py
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ArchivalPRO-Executable
         path: release/app.exe
