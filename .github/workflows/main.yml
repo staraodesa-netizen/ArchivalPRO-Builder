@@ -30,12 +30,12 @@ jobs:
         New-Item -Path . -Name ".streamlit" -ItemType Directory
         Set-Content -Path ".streamlit/secrets.toml" -Value "api_key = `"${{ env.GEMINI_API_KEY }}`""
 
-    - name: Run Nuitka Build
+    - name: Run Nuitka Build (Folder Mode)
       run: |
-        python -m nuitka --onefile --standalone --windows-disable-console --output-dir=release app.py
+        python -m nuitka --standalone --windows-disable-console --output-dir=release app.py
 
-    - name: Upload Artifact
+    - name: Upload Artifact (Folder)
       uses: actions/upload-artifact@v4
       with:
-        name: ArchivalPRO-Executable
-        path: release/app.exe
+        name: ArchivalPRO-Folder
+        path: release/app.dist/
